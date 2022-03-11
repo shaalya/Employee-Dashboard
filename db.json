@@ -1,0 +1,13 @@
+{
+  "posts": [],
+  "signupUsers": [
+    {
+      "username": "admin",
+      "password": "@Admin1234",
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

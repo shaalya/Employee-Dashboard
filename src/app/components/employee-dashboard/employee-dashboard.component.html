@@ -1,0 +1,89 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1 style="margin-left: 20px">EMPLOYEE PORTAL</h1>
+    <span class="menu-spacer"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav style="width: 250px">
+    <mat-nav-list>
+      <img style="width: 15rem" src="/assets/mat-icon/profile-icon.svg" />
+      <div style="text-align: center">
+        <p style="font-size: 24px">
+          {{ username ? "Hello" + " " + username : "Hello User!" }}
+        </p>
+        <button
+          style="text-align: center"
+          mat-raised-button
+          color="warn"
+          routerLink="/login"
+        >
+          LogOut
+        </button>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button
+      (click)="openDialog()"
+      style="margin-left: 1380px; margin-top: 3rem"
+      mat-raised-button
+      color="warn"
+    >
+      Add Employee
+    </button>
+
+    <div *ngIf="employeeDetails.length > 0">
+      <mat-form-field>
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          [(ngModel)]="searchQuery"
+          matInput
+          type="search"
+          placeholder="Search"
+          class="search-input"
+        />
+      </mat-form-field>
+      <table class="table" matSort (matSortChange)="sortData($event)">
+        <thead>
+          <tr>
+            <th mat-sort-header="id" scope="col">Employee ID</th>
+            <th mat-sort-header="name" scope="col">Employee Name</th>
+            <th mat-sort-header="designation" scope="col">Designation</th>
+            <th mat-sort-header="joining_date" scope="col">Joining Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employeeDetails">
+            <td [innerHtml]="emp.id | highlight: searchQuery"></td>
+            <td [innerHtml]="emp.name | highlight: searchQuery"></td>
+            <td [innerHtml]="emp.designation | highlight: searchQuery"></td>
+            <td
+              [innerHtml]="
+                emp.joining_date | highlight: searchQuery | date: 'dd-MMM-yyyy'
+              "
+            ></td>
+            <td>
+              <img
+                (click)="editEmployee(emp); openDialog()"
+                src="/assets/mat-icon/edit-icon.svg"
+              />
+              <img
+                (click)="openDialog(emp.id, true)"
+                src="/assets/mat-icon/delete-icon.svg"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="employeeDetails.length === 0" class="no-data-yet">
+     No employee yet! Click on Add Employee to add new employee Details.
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

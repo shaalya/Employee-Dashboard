@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <mat-card class="card">
+    <mat-card-content>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <h2 class="heading">Sign Up</h2>
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput required />
+          <mat-error
+            *ngIf="
+              signupForm.controls.username.status === 'INVALID' &&
+              signupForm.value.username.length == 0 &&
+              signupForm.controls.username.touched
+            "
+            >Username required!</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input
+            formControlName="password"
+            type="password"
+            [type]="showPassword ? 'text' : 'password'"
+            matInput
+            required
+          />
+          <mat-icon matSuffix (click)="togglePasswordVisibility()">
+            {{ showPassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+
+          <mat-error
+            *ngIf="signupForm.controls.password.errors?.passwordStrength"
+          >
+            Must contain at least one number and one uppercase and lowercase
+            letter, and at least 8 or more characters
+          </mat-error>
+        </mat-form-field>
+        <div class="button-wrapper">
+          <button
+            [disabled]="!signupForm.valid"
+            class="login-btn"
+            routerLink="/signup"
+            mat-raised-button
+            color="primary"
+          >
+            Signup
+          </button>
+        </div>
+        <a class="click-me" routerLink="/login"
+          >Existing User?Click to login!</a
+        >
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

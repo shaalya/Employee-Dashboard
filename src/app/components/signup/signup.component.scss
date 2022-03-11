@@ -1,0 +1,86 @@
+.wrapper {
+  background: rgb(63, 94, 251);
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
+}
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-card-content {
+  padding: 2rem;
+  font-size: medium;
+}
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+mat-card {
+  text-align: center;
+}
+
+mat-form-field {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.card {
+  color: black;
+  border: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-btn {
+  padding: 0.5rem;
+  width: 7rem;
+}
+
+.heading {
+  font-size: 30px;
+  color: black;
+  margin-bottom: 3rem;
+}
+
+.click-me:hover {
+  color: #ff4081;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}

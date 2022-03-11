@@ -1,0 +1,80 @@
+<div class="wrapper">
+  <mat-card class="card">
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h2 class="heading">Log In</h2>
+        <mat-form-field appearance="fill" class="mb-2">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput required />
+          <mat-error
+            *ngIf="
+              loginForm.controls.username.status === 'INVALID' &&
+              loginForm.value.username.length == 0 &&
+              loginForm.controls.username.touched
+            "
+            >Username required!</mat-error
+          >
+          <mat-error
+            *ngIf="
+              loginForm.controls.username.status === 'INVALID' &&
+              3 > loginForm.value.username.length &&
+              loginForm.value.username != '' &&
+              loginForm.controls.username.touched
+            "
+            >Username must be at least 3 characters</mat-error
+          >
+          <mat-error
+            *ngIf="
+              loginForm.controls.username.status === 'INVALID' &&
+              loginForm.value.username.length > 30 &&
+              loginForm.value.username != '' &&
+              loginForm.controls.username.touched
+            "
+            >Username must not exceed 50 characters</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="mb-2">
+          <mat-label>Password</mat-label>
+          <input
+            formControlName="password"
+            type="password"
+            [type]="showPassword ? 'text' : 'password'"
+            matInput
+            required
+          />
+          <mat-icon matSuffix (click)="togglePasswordVisibility()">
+            {{ showPassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+
+          <mat-error
+            *ngIf="loginForm.controls.password.errors?.passwordStrength"
+          >
+            Must contain at least one number and one uppercase and lowercase
+            letter, and at least 8 or more characters
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-wrapper">
+          <button
+            [disabled]="!loginForm.valid"
+            class="login-btn"
+            mat-raised-button
+            style="background: var(--mat-secondary)"
+          >
+            Login
+          </button>
+          <button
+            class="login-btn"
+            routerLink="/signup"
+            mat-raised-button
+            color="primary"
+          >
+            Signup
+          </button>
+        </div>
+        <a class="click-me" routerLink="/signup">New User?Click to signup!</a>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
